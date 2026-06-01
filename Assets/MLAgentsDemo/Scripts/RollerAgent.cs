@@ -3,6 +3,9 @@ using Unity.MLAgents.Actuators;
 using Unity.MLAgents.Policies;
 using Unity.MLAgents.Sensors;
 using UnityEngine;
+#if ENABLE_INPUT_SYSTEM
+using UnityEngine.InputSystem;
+#endif
 
 namespace MLAgent2026.Demo
 {
@@ -92,8 +95,43 @@ namespace MLAgent2026.Demo
         public override void Heuristic(in ActionBuffers actionsOut)
         {
             ActionSegment<float> continuousActions = actionsOut.ContinuousActions;
+#if ENABLE_INPUT_SYSTEM
+            Keyboard keyboard = Keyboard.current;
+            if (keyboard == null)
+            {
+                continuousActions[0] = 0f;
+                continuousActions[1] = 0f;
+                return;
+            }
+
+            float horizontal = 0f;
+            if (keyboard.aKey.isPressed || keyboard.leftArrowKey.isPressed)
+            {
+                horizontal -= 1f;
+            }
+
+            if (keyboard.dKey.isPressed || keyboard.rightArrowKey.isPressed)
+            {
+                horizontal += 1f;
+            }
+
+            float vertical = 0f;
+            if (keyboard.sKey.isPressed || keyboard.downArrowKey.isPressed)
+            {
+                vertical -= 1f;
+            }
+
+            if (keyboard.wKey.isPressed || keyboard.upArrowKey.isPressed)
+            {
+                vertical += 1f;
+            }
+
+            continuousActions[0] = horizontal;
+            continuousActions[1] = vertical;
+#else
             continuousActions[0] = Input.GetAxis("Horizontal");
             continuousActions[1] = Input.GetAxis("Vertical");
+#endif
         }
 
         private Vector3 RandomPosition()
