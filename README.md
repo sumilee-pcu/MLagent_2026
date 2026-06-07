@@ -36,3 +36,15 @@ Start training:
 ```
 
 Then press Play in Unity.
+
+## 외부 에셋 / 라이선스 (Assets & License)
+
+이 프로젝트는 **외부 서드파티 에셋을 사용하지 않습니다.**
+씬의 모든 오브젝트는 Unity 기본 프리미티브(Sphere/Plane/Cube)와 직접 작성한
+스크립트로만 구성됩니다. 별도 출처 표기가 필요한 에셋은 없습니다.
+
+- Unity ML-Agents (`com.unity.ml-agents`): Unity 공식 패키지 — Unity Companion License
+- `Assets/TutorialInfo/`: Unity 프로젝트 템플릿 기본 포함 파일
+
+외부 모델·스프라이트·오디오 등을 추가할 경우, 이 섹션에
+`에셋명 / 작성자 / 출처 URL / 라이선스` 형식으로 기록하세요.
